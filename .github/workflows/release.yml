@@ -5,8 +5,6 @@ on:
     workflows: [Run e2e tests]
     types:
       - completed
-    branches:
-      - alpha
 
 jobs:
   release:
