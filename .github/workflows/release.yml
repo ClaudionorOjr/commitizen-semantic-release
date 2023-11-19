@@ -9,7 +9,13 @@ on:
 jobs:
   release:
     if: github.event.workflow_run.conclusion == 'success'
+
     name: Run semanti release
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
     runs-on: ubuntu-latest
 
     steps:
