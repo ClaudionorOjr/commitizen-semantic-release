@@ -17,4 +17,17 @@ describe('Contém um conjunto de testes, que será executado um a um', () => {
     const temMundial = false
     expect(temMundial).toBeFalsy()
   })
+
+  it('Deve conter todos os valores do objeto fornecido', () => {
+    const meuObjeto = {
+      nome: 'Palmeiras',
+      temMundial: false,
+      cor: 'Verde',
+    }
+    expect(meuObjeto).toEqual({
+      nome: 'Palmeiras',
+      temMundial: false,
+      cor: 'Verde',
+    })
+  })
 })
