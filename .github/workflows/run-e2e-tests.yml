@@ -1,0 +1,31 @@
+name: Run e2e tests
+
+on:
+  workflow_run:
+    workflows: [Run unit tests]
+    types:
+      - completed
+    branches:
+      - alpha
+
+jobs:
+  e2e-tests:
+    if: github.event.workflow_run.conclusion == 'success'
+    name: Run e2e tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run e2e tests
+        run: npm run test:e2e
