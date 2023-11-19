@@ -1,0 +1,30 @@
+{
+  "name": "commitizen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run -c ./vitest.config.ts",
+    "test:watch": "vitest -c ./vitest.config.ts",
+    "test:e2e": "vitest run -c ./vitest.config.e2e.ts",
+    "test:e2e:watch": "vitest -c ./vitest.config.e2e.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/node": "^20.9.2",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.54.0",
+    "tsx": "^4.1.4",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
