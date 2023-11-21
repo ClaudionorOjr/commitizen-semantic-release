@@ -1,16 +1,9 @@
-name: Release
+name: Prerelease
 
-on:
-  workflow_dispatch:
-    inputs:
-      tests_succeeded:
-        required: true
-        type: boolean
-        description: 'This input returns `true` if the tests are succeeded.'
+on: workflow_dispatch
 
 jobs:
-  release:
-    if: ${{ inputs.tests_succeeded == true }}
+  prerelease:
     name: Run semanti release
     permissions:
       contents: write
@@ -31,8 +24,8 @@ jobs:
 
       - name: Debug Workflow Run
         run: |
-          echo "Workflow ${{ github.workflow }}"
-          echo "Run Unit Tests Job: ${{ github.job }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Workflow Run Job: ${{ github.job }}"
           echo "Workflow Run Ref: ${{ github.ref }}"
 
       - name: Install dependencies
