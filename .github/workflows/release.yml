@@ -1,12 +1,12 @@
 name: Release
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       tests_succeeded:
         required: true
         type: boolean
-        description: 'Tests succeeded!'
+        description: 'This input returns `true` if the tests are succeeded.'
 
 jobs:
   release:
@@ -28,6 +28,12 @@ jobs:
         with:
           node-version: 'latest'
           cache: 'npm'
+
+      - name: Debug Workflow Run
+        run: |
+          echo "Workflow ${{ github.workflow }}"
+          echo "Run Unit Tests Job: ${{ github.job }}"
+          echo "Workflow Run Ref: ${{ github.ref }}"
 
       - name: Install dependencies
         run: npm ci

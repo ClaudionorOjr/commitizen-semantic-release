@@ -64,6 +64,11 @@ jobs:
     name: Notify Release
     needs: e2e-tests
     if: ${{ needs.e2e-tests.result == 'success' }}
-    uses: ./.github/workflows/release.yml
-    with:
-      tests_succeeded: true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Release Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Release
+          inputs: '{ "tests_succeeded": true }'
