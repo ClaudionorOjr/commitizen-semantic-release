@@ -23,6 +23,7 @@ jobs:
       - name: Debug Workflow Run
         run: |
           echo "Workflow ${{ github.workflow }}"
+          echo "Run Unit Tests Job: ${{ github.job }}"
           echo "Workflow Run Ref: ${{ github.ref }}"
 
       - name: Install dependencies
@@ -50,6 +51,7 @@ jobs:
       - name: Debug Workflow Run
         run: |
           echo "Workflow ${{ github.workflow }}"
+          echo "Run E2E Tests Job: ${{ github.job }}"
           echo "Workflow Run Ref: ${{ github.ref }}"
 
       - name: Install dependencies
@@ -57,3 +59,11 @@ jobs:
 
       - name: Run E2E tests
         run: npm run test:e2e
+
+  notify-release:
+    name: Notify Release
+    needs: e2e-tests
+    if: ${{ needs.e2e-tests.result == 'success' }}
+    uses: ./.github/workflows/release.yml
+    with:
+      tests_succeeded: true

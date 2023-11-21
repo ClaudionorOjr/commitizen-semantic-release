@@ -1,15 +1,16 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: [Run e2e tests]
-    types:
-      - completed
+  workflow_call:
+    inputs:
+      tests_succeeded:
+        required: true
+        type: boolean
+        description: 'Tests succeeded!'
 
 jobs:
   release:
-    if: github.event.workflow_run.conclusion == 'success'
-
+    if: ${{ inputs.tests_succeeded == true }}
     name: Run semanti release
     permissions:
       contents: write
