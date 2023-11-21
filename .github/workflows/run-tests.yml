@@ -22,8 +22,8 @@ jobs:
 
       - name: Debug Workflow Run
         run: |
-          echo "Workflow ${{ github.workflow }}"
-          echo "Run Unit Tests Job: ${{ github.job }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Workflow Run Job: ${{ github.job }}"
           echo "Workflow Run Ref: ${{ github.ref }}"
 
       - name: Install dependencies
@@ -50,8 +50,8 @@ jobs:
 
       - name: Debug Workflow Run
         run: |
-          echo "Workflow ${{ github.workflow }}"
-          echo "Run E2E Tests Job: ${{ github.job }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Workflow Run Job: ${{ github.job }}"
           echo "Workflow Run Ref: ${{ github.ref }}"
 
       - name: Install dependencies
@@ -64,6 +64,10 @@ jobs:
     name: Notify Release
     needs: e2e-tests
     if: ${{ needs.e2e-tests.result == 'success' }}
+    permissions:
+      contents: write
+      actions: write
+
     runs-on: ubuntu-latest
 
     steps:
