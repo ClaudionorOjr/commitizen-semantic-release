@@ -1,3 +1,13 @@
+# [1.0.0-alpha.2](https://github.com/ClaudionorOjr/commitizen-semantic-release/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-11-22)
+
+
+### Features
+
+* **ci:** update file to prerelease ([ee105f1](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/ee105f1eb26892430a98908e48c3ef7681e99bf0))
+* **test:** another test for the e2e tests file ([9b85de7](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/9b85de743d49dbc42d6d8d25bbbe1bc200b8b95e))
+* **test:** edit e2e tests file ([37c2309](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/37c23097c034b88d890b4c82ad1d09d11bff99ed))
+* **test:** fixed e2e test ([71b5e8f](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/71b5e8f650fd8de969ec681e740977122dc5be62))
+
 # 1.0.0-alpha.1 (2023-11-21)
 
 
