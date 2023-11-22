@@ -1,3 +1,11 @@
+# [1.2.0-alpha.1](https://github.com/ClaudionorOjr/commitizen-semantic-release/compare/v1.1.0...v1.2.0-alpha.1) (2023-11-22)
+
+
+### Features
+
+* **ci:** configured only one release CI file ([d7230fb](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/d7230fbb287202d8a10c9976e5cc85b4c1efb601))
+* **test:** another test ([bbc9962](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/bbc9962e1fd5dc8de8ee5522906efdefbc30f836))
+
 # [1.1.0](https://github.com/ClaudionorOjr/commitizen-semantic-release/compare/v1.0.0...v1.1.0) (2023-11-22)
 
 
