@@ -60,8 +60,8 @@ jobs:
       - name: Run E2E tests
         run: npm run test:e2e
 
-  notify-prerelease:
-    name: Notify Prerelease
+  notify-release:
+    name: Notify Release
     needs: e2e-tests
     if: ${{ needs.e2e-tests.result == 'success' }}
     permissions:
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Prerelease Workflow
+      - name: Trigger Release Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: Prerelease
+          workflow: Release

@@ -12,4 +12,22 @@ describe('Contém um conjunto de testes, que será executado um a um', () => {
   it('O valor deve ser um número', () => {
     expect(20).toEqual(expect.any(Number))
   })
+
+  it('Deve retornar que o Palmeiras não tem mundial', () => {
+    const temMundial = false
+    expect(temMundial).toBeFalsy()
+  })
+
+  it('Deve conter todos os valores do objeto fornecido', () => {
+    const meuObjeto = {
+      nome: 'Palmeiras',
+      temMundial: false,
+      cor: 'Verde',
+    }
+    expect(meuObjeto).toEqual({
+      nome: 'Palmeiras',
+      temMundial: false,
+      cor: 'Verde',
+    })
+  })
 })

@@ -107,7 +107,7 @@ Primeiro é necessário alterar o arquivo `.releaserc.json`, adicionando as outr
 
 - ### Github Actions
 
-Estou utilizando uma action não oficional ([benc-uk/workflow-dispatch](https://github.com/benc-uk/workflow-dispatch)), em `run-tests.yml` para disparar automaticamente o fluxo de trabalho do arquivo `prerelease.yml` que está configurado com `workflow_dispatch`.
+Estou utilizando uma action não oficional ([benc-uk/workflow-dispatch](https://github.com/benc-uk/workflow-dispatch)), em `run-tests.yml` para disparar automaticamente o fluxo de trabalho do arquivo `release.yml` que está configurado com `workflow_dispatch`.
 
 Arquivo `run-tests.yml`:
 
@@ -126,8 +126,8 @@ jobs:
   e2e-tests:
     # Ações do fluxo de trabalho...
 
-  notify-prerelease:
-    name: Notify Prerelease
+  notify-release:
+    name: Notify Release
     needs: e2e-tests
     if: ${{ needs.e2e-tests.result == 'success' }}
     permissions:
@@ -137,23 +137,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Prerelease Workflow
+      - name: Trigger Release Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: Prerelease
+          workflow: Release
 ```
 
 > NOTA: é necessário dar permissões para esse fluxo de trabalho para que o `benc-uk/workflow-dispatch@v1` execute corretamente.
 
-Arquivo `prerelease.yml`:
+Arquivo `release.yml`:
 
 ```yml
-name: Prerelease
+name: Release
 
 on: workflow_dispatch
 
 jobs:
-  prerelease:
+  release:
     # Ações do fluxo de trabalho...
 ```
 
@@ -164,7 +164,7 @@ Para que o evento `workflow_dispatch` seja acionado é **necessário que o arqui
 
 #### Adicionando inputs aos fluxos de trabalho
 
-Caso deseje passar inputs do fluxo de trabalho acionador (`run-tests.yml`) para o fluxo de trabalho acionado (`prerelease.yml`), pode ser feito da seguinte forma:
+Caso deseje passar inputs do fluxo de trabalho acionador (`run-tests.yml`) para o fluxo de trabalho acionado (`release.yml`), pode ser feito da seguinte forma:
 
 Arquivo `run-tests.yml`:
 
@@ -183,8 +183,8 @@ jobs:
   e2e-tests:
     # Ações do fluxo de trabalho...
 
-  notify-prerelease:
-    name: Notify Prerelease
+  notify-release:
+    name: Notify release
     needs: e2e-tests
     if: ${{ needs.e2e-tests.result == 'success' }}
     permissions:
@@ -194,17 +194,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger Prerelease Workflow
+      - name: Trigger Release Workflow
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: Prerelease
+          workflow: Release
           inputs: '{ "tests_succeeded": true, "status": "validated" }'
 ```
 
-Arquivo `prerelease.yml`:
+Arquivo `release.yml`:
 
 ```yml
-name: Prerelease
+name: Release
 
 on:
   workflow_dispatch:
@@ -218,6 +218,6 @@ on:
         type: string
 
 jobs:
-  prerelease:
+  release:
     # Ações do fluxo de trabalho...
 ```
