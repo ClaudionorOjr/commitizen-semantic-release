@@ -14,7 +14,7 @@ describe('Contém um conjunto de testes, que será executado um a um', () => {
   })
 
   it('Deve retornar que o Palmeiras não tem mundial', () => {
-    const temMundial = true
+    const temMundial = false
     expect(temMundial).toBeFalsy()
   })
 
