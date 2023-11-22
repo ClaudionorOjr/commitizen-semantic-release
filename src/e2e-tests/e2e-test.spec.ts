@@ -8,4 +8,8 @@ describe('Contém um conjunto de testes, que será executado um a um', () => {
   it("Deve concatenar a palavra 'Olá' com a palavra 'Mundo' e retornar 'Olá Mundo'", () => {
     expect('Olá ' + 'Mundo').toBe('Olá Mundo')
   })
+
+  it('O valor deve ser um número', () => {
+    expect(20).toEqual(expect.any(Number))
+  })
 })
