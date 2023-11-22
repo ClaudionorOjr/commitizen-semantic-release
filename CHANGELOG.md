@@ -1,3 +1,10 @@
+# [1.1.0-alpha.4](https://github.com/ClaudionorOjr/commitizen-semantic-release/compare/v1.1.0-alpha.3...v1.1.0-alpha.4) (2023-11-22)
+
+
+### Features
+
+* **ci:** release file event changed to occur when a pull request is opened ([ee212b0](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/ee212b0ca7183dedbbbb9acef12359afaf36eaf8))
+
 # [1.1.0-alpha.3](https://github.com/ClaudionorOjr/commitizen-semantic-release/compare/v1.1.0-alpha.2...v1.1.0-alpha.3) (2023-11-22)
 
 
