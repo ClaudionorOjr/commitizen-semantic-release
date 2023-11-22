@@ -102,3 +102,62 @@ Primeiro é necessário alterar o arquivo `.releaserc.json`, adicionando as outr
   "branches": ["main", { "name": "alpha", "prerelease": true }]
 }
 ```
+
+---
+
+- ### Github Actions
+
+Estou utilizando uma action não oficional ([benc-uk/workflow-dispatch](https://github.com/benc-uk/workflow-dispatch)), em `run-tests.yml` para disparar automaticamente o fluxo de trabalho do arquivo `prerelease.yml` que está configurado com `workflow_dispatch`.
+
+Arquivo `run-tests.yml`:
+
+```yml
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - alpha
+
+jobs:
+  unit-tests:
+    # Ações do fluxo de trabalho...
+
+  e2e-tests:
+    # Ações do fluxo de trabalho...
+
+  notify-prerelease:
+    name: Notify Prerelease
+    needs: e2e-tests
+    if: ${{ needs.e2e-tests.result == 'success' }}
+    permissions:
+      contents: write
+      actions: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Prerelease Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Prerelease
+```
+
+> NOTA: é necessário dar permissões para esse fluxo de trabalho para que o `benc-uk/workflow-dispatch@v1` execute corretamente.
+
+Arquivo `prerelease.yml`:
+
+```yml
+name: Prerelease
+
+on: workflow_dispatch
+
+jobs:
+  prerelease:
+    # Ações do fluxo de trabalho...
+```
+
+Para que o evento `workflow_dispatch` seja acionado é **necessário que o arquivo de fluxo de trabalho** que contém esse evento **esteja presente na branch padrão**, se não o `benc-uk/workflow-dispatch` irá retornar que o arquivo não foi encontrado.
+
+> NOTA: apesar dessa exigência, o evento é executado na branch onde é disparado o evento. Por exemplo, se a ação que aciona o evento `workflow_dispatch` for acionado na **branch alpha (não padrão)**, esse evento é executado na branch alpha.  
+> NOTA: optei por essa implementação ao invés da utilização do evento `workflow_run` do Github Actions, pela limitação do evento `workflow_run` onde só executa na **branch main (padrão)**. E para o caso desse projeto, era esperado que o semantic release executasse na branch alpha para que gerasse as prereleases do projeto.
