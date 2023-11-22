@@ -161,3 +161,63 @@ Para que o evento `workflow_dispatch` seja acionado é **necessário que o arqui
 
 > NOTA: apesar dessa exigência, o evento é executado na branch onde é disparado o evento. Por exemplo, se a ação que aciona o evento `workflow_dispatch` for acionado na **branch alpha (não padrão)**, esse evento é executado na branch alpha.  
 > NOTA: optei por essa implementação ao invés da utilização do evento `workflow_run` do Github Actions, pela limitação do evento `workflow_run` onde só executa na **branch main (padrão)**. E para o caso desse projeto, era esperado que o semantic release executasse na branch alpha para que gerasse as prereleases do projeto.
+
+#### Adicionando inputs aos fluxos de trabalho
+
+Caso deseje passar inputs do fluxo de trabalho acionador (`run-tests.yml`) para o fluxo de trabalho acionado (`prerelease.yml`), pode ser feito da seguinte forma:
+
+Arquivo `run-tests.yml`:
+
+```yml
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - alpha
+
+jobs:
+  unit-tests:
+    # Ações do fluxo de trabalho...
+
+  e2e-tests:
+    # Ações do fluxo de trabalho...
+
+  notify-prerelease:
+    name: Notify Prerelease
+    needs: e2e-tests
+    if: ${{ needs.e2e-tests.result == 'success' }}
+    permissions:
+      contents: write
+      actions: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Prerelease Workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Prerelease
+          inputs: '{ "tests_succeeded": true, "status": "validated" }'
+```
+
+Arquivo `prerelease.yml`:
+
+```yml
+name: Prerelease
+
+on:
+  workflow_dispatch:
+    inputs:
+      tests_succeeded:
+        required: true
+        type: boolean
+        description: 'This input returns `true` if the tests are succeeded.'
+      status:
+        required: false
+        type: string
+
+jobs:
+  prerelease:
+    # Ações do fluxo de trabalho...
+```

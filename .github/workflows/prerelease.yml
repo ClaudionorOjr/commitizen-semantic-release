@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
   prerelease:
-    name: Run semanti release
+    name: Generate prerelease
     permissions:
       contents: write
       issues: write
