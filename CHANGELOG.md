@@ -1,3 +1,10 @@
+# [1.1.0-alpha.5](https://github.com/ClaudionorOjr/commitizen-semantic-release/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2023-11-22)
+
+
+### Features
+
+* **test:** another e2e test file ([41ffb4a](https://github.com/ClaudionorOjr/commitizen-semantic-release/commit/41ffb4a51f18103c1ad0e413b6b3593d4f4969d2))
+
 # [1.1.0-alpha.4](https://github.com/ClaudionorOjr/commitizen-semantic-release/compare/v1.1.0-alpha.3...v1.1.0-alpha.4) (2023-11-22)
 
 
